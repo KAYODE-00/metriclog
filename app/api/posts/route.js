@@ -28,6 +28,12 @@ export async function POST(req) {
     return NextResponse.json({ error: 'You must be logged in to publish.' }, { status: 401 });
   }
 
+  // Check if user is admin
+  const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+  if (!user?.isAdmin) {
+    return NextResponse.json({ error: 'Only admins can publish posts.' }, { status: 403 });
+  }
+
   const { title, excerpt, content, coverImage, published, tags } = await req.json();
 
   if (!title?.trim() || !content?.trim()) {

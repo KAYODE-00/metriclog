@@ -14,6 +14,7 @@ model User {
   passwordHash String
   bio          String?
   avatarColor  String    @default("#2D5F5A")
+  isAdmin      Boolean   @default(false)
   createdAt    DateTime  @default(now())
   posts        Post[]
   comments     Comment[]

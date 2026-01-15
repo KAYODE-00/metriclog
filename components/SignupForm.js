@@ -4,7 +4,35 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { UserPlus, AlertCircle, Loader } from 'lucide-react';
+
+function AlertIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="8" x2="12" y2="12" />
+      <line x1="12" y1="16" x2="12.01" y2="16" />
+    </svg>
+  );
+}
+
+function UserPlusIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="8.5" cy="7" r="4" />
+      <line x1="20" y1="8" x2="20" y2="14" />
+      <line x1="17" y1="11" x2="23" y2="11" />
+    </svg>
+  );
+}
+
+function SpinIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="animate-spin">
+      <path d="M12 2v4m0 12v4M4.22 4.22l2.83 2.83m8.9 8.9l2.83 2.83M2 12h4m12 0h4M4.22 19.78l2.83-2.83m8.9-8.9l2.83-2.83" />
+    </svg>
+  );
+}
 
 export default function SignupForm() {
   const router = useRouter();
@@ -165,7 +193,7 @@ export default function SignupForm() {
           {/* Error Message */}
           {error && (
             <div className="flex gap-3 p-3 bg-red-50 border border-danger rounded-sm">
-              <AlertCircle size={18} className="text-danger flex-shrink-0 mt-0.5" />
+              <AlertIcon />
               <p className="text-sm text-danger">{error}</p>
             </div>
           )}
@@ -178,12 +206,12 @@ export default function SignupForm() {
           >
             {loading ? (
               <>
-                <Loader size={18} className="animate-spin" />
+                <SpinIcon />
                 Creating account...
               </>
             ) : (
               <>
-                <UserPlus size={18} />
+                <UserPlusIcon />
                 Create Account
               </>
             )}
